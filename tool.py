@@ -81,7 +81,8 @@ class Graphics:
             #裁切图片  
             crop_img = im.crop(region)  
             #保存裁切后的图片  
-            crop_img.save(self.outfile)       
+            crop_img.save(self.outfile)  
+           
 
 
 # 定义压缩比，数值越大，压缩越小
@@ -146,6 +147,14 @@ def compress(choose, des_dir, src_dir, file_list):
         w, h = img.size
         img.thumbnail((int(w/scale), int(h/scale)))
         img.save(des_dir + infile)
+
+def compress1(choose, des_dir, src_dir, file_list):
+    """压缩算法，img.thumbnail对图片进行压缩"""
+    for infile in file_list:
+        img = Image.open(src_dir+infile)
+        img.thumbnail((200, 200))
+        img.save(des_dir + infile)
+
 def compress_photo():
     '''调用压缩图片的函数
     '''
@@ -165,7 +174,7 @@ def compress_photo():
     for i in range(len(file_list_des)):
         if file_list_des[i] in file_list_src:
             file_list_src.remove(file_list_des[i])
-    compress('4', des_dir, src_dir, file_list_src)
+    compress1('4', des_dir, src_dir, file_list_src)
 
 
 def handle_photo():
@@ -233,8 +242,6 @@ def cut_photo():
     else:
         print("source directory not exist!")     
 
-
-
 def git_operation():
     
     os.system('git add --all')
@@ -247,7 +254,7 @@ def git_operation():
 #     git_operation()    # 提交到github仓库
 #     handle_photo()     # 将文件处理成json格式，存到博客仓库中
 cut_photo()        # 裁剪图片，裁剪成正方形，去中间部分
-compress_photo()   # 压缩图片，并保存到mini_photos文件夹下
+compress_photo()   # 压缩图片，并保存到min_photos文件夹下
 git_operation()    # 提交到github仓库
 handle_photo()     # 将文件处理成json格式，存到博客仓库中   
     
