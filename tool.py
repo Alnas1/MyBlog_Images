@@ -152,7 +152,7 @@ def compress1(choose, des_dir, src_dir, file_list):
     """压缩算法，img.thumbnail对图片进行压缩"""
     for infile in file_list:
         img = Image.open(src_dir+infile)
-        img.thumbnail((200, 200))
+        img.thumbnail((300, 300))
         img.save(des_dir + infile)
 
 def compress_photo():
